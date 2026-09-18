@@ -51,6 +51,6 @@ app.post("/api/performances", performancesController.create);
 app.delete("/api/performances", performancesController.removeAll);
 app.delete("/api/performances/:performanceId", performancesController.remove);
 app.patch("/api/performances/:performanceId/hours", performancesController.updateHours);
-app.patch("/api/performances/:performanceId", performancesController.modify);
+app.patch("/api/performances/:performanceId/modify", performancesController.modify);
 
 export default app;
