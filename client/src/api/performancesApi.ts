@@ -8,9 +8,6 @@ export type PerformanceData = {
     section_id: number;
 };
 export type PerformanceInput = Omit<PerformanceData, "id">;
-type PerformanceHourUpdate = {
-    new_performance_hours: number;
-};
 
 const getAll = async () => {
     const response = await fetch(BASE_URL, {
@@ -45,12 +42,12 @@ const removeAll = async () => {
     return await response.json();
 };
 
-const updateHours = async (id: number, performance: PerformanceHourUpdate) => {
+const updateHours = async (id: number, new_hours: number) => {
     const response = await fetch(`${BASE_URL}/${id}/hours`, {
         credentials: "include",
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(performance),
+        body: JSON.stringify({ new_hours }),
     });
     return await response.json();
 };

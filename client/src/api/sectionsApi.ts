@@ -20,7 +20,7 @@ const create = async (section: SectionInput) => {
         credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(section);
+        body: JSON.stringify(section),
     });
     return await response.json();
 };
@@ -46,7 +46,7 @@ const modify = async (id: number, section: SectionData) => {
         credentials: "include",
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(section);
+        body: JSON.stringify(section),
     });
     return await response.json();
 };
