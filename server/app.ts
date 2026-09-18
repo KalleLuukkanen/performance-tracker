@@ -4,6 +4,7 @@ import morgan from "morgan";
 import { toNodeHandler, fromNodeHeaders } from "better-auth/node";
 import { auth } from "./auth.js";
 import * as sectionsController from "./controllers/sectionsController.js";
+import * as performancesController from "./controllers/performancesController.js";
 
 const app = express();
 
@@ -44,5 +45,12 @@ app.post("/api/sections", sectionsController.create);
 app.delete("/api/sections", sectionsController.removeAll);
 app.delete("/api/sections/:sectionId", sectionsController.remove);
 app.patch("/api/sections/:sectionId", sectionsController.modify);
+
+app.get("/api/performances", performancesController.getAll);
+app.post("/api/performances", performancesController.create);
+app.delete("/api/performances", performancesController.removeAll);
+app.delete("/api/performances/:performanceId", performancesController.remove);
+app.patch("/api/performances/:performanceId/hours", performancesController.updateHours);
+app.patch("/api/performances/:performanceId", performancesController.modify);
 
 export default app;
