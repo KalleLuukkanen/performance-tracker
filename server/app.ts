@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import { toNodeHandler, fromNodeHeaders } from "better-auth/node";
 import { auth } from "./auth.js";
+import * as sectionsController from "./controllers/sectionsController.js";
 
 const app = express();
 
@@ -37,5 +38,11 @@ app.use("/api", (req, res, next) => {
 app.get("/api/test", (req, res) => {
     res.send({ message: "test" });
 });
+
+app.get("/api/sections", sectionsController.getAll);
+app.post("/api/sections", sectionsController.create);
+app.delete("/api/sections", sectionsController.removeAll);
+app.delete("/api/sections/:sectionId", sectionsController.remove);
+app.patch("/api/sections/:sectionId", sectionsController.modify);
 
 export default app;
