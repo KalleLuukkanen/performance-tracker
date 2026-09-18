@@ -21,7 +21,7 @@ function LoginOrRegister({ isLogin }: { isLogin: boolean }) {
                         setSuccess(true);
                         setTimeout(() => {
                             window.location.href = "/";
-                        }, 2000);
+                        }, 1000);
                     },
                 }
             );
@@ -36,7 +36,7 @@ function LoginOrRegister({ isLogin }: { isLogin: boolean }) {
                         setSuccess(true);
                         setTimeout(() => {
                             window.location.href = "/";
-                        }, 2000);
+                        }, 1000);
                     }
                 }
             );
@@ -45,32 +45,38 @@ function LoginOrRegister({ isLogin }: { isLogin: boolean }) {
 
     if (!success) {
         return (
-            <div>
-                <span>{isLogin ? "Login:" : "Register"}</span>
-                <form onSubmit={handleForm}>
-                    <label>
-                        <span>Email</span>
+            <div className="flex flex-col shadow-2xl mx-auto w-100 p-4 space-y-6 bg-white rounded">
+                <span className="text-3xl">{isLogin ? "Login:" : "Register"}</span>
+                <form
+                    onSubmit={handleForm}
+                    className="flex flex-col space-y-4"
+                >
+                    <label className="flex flex-col space-y-1">
+                        <span className="text-lg">Email</span>
                         <input
                             type="email"
                             required
                             onChange={(e) => setEmail(e.target.value)}
+                            className="border border-gray-300 rounded p-1"
                         />
                     </label>
-                    <label>
-                        <span>Password</span>
+                    <label className="flex flex-col space-y-1">
+                        <span className="text-lg">Password</span>
                         <input
                             type="password"
                             required
                             onChange={(e) => setPassword(e.target.value)}
+                            className="border border-gray-300 rounded p-1"
                         />
                     </label>
-                    <button type="submit">{isLogin ? "Login" : "Register"}</button>
+                    <button type="submit" className="border border-gray-300 rounded-2xl p-2 w-32 cursor-pointer bg-green-300 mx-auto">{isLogin ? "Login" : "Register"}</button>
                 </form>
+                <span className="border border-gray-500 mx-2" />
                 {isLogin && <p>No account yet? Register <a href="/register" className="text-blue-600 hover:underline">here</a></p>}
                 {!isLogin &&
-                    <div>
+                    <div className="space-y-1">
                         <p>Already have an account? Login <a href="/login" className="text-blue-600 hover:underline">here</a></p>
-                        <p>Or you wish to read more about the page before signing up, you can do so
+                        <p>Or if you wish to read more about the page before signing up, you can do so{" "}
                             <a href="/about" className="text-blue-600 hover:underline">here</a>
                         </p>
                     </div>
@@ -79,8 +85,8 @@ function LoginOrRegister({ isLogin }: { isLogin: boolean }) {
         )
     } else {
         return (
-            <div>
-                <p>{isLogin ? "Login" : "Registration"} successful! Redirecting...</p>
+            <div className="bg-white p-4 shadow-xl">
+                <p className="text-2xl">{isLogin ? "Login" : "Registration"} successful! Redirecting...</p>
             </div>
         )
     }
