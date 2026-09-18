@@ -85,7 +85,7 @@ function LoginOrRegister({ isLogin }: { isLogin: boolean }) {
         )
     } else {
         return (
-            <div className="bg-white p-4 shadow-xl">
+            <div className="p-4 shadow-xl">
                 <p className="text-2xl">{isLogin ? "Login" : "Registration"} successful! Redirecting...</p>
             </div>
         )
