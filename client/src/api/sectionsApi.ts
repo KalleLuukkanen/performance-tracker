@@ -26,15 +26,19 @@ const create = async (section: SectionInput) => {
 };
 
 const remove = async (id: number) => {
-    const response = await fetch(`BASE_URL/${id}`, {
+    const response = await fetch(`${BASE_URL}/${id}`, {
         credentials: "include",
         method: "DELETE",
     });
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error);
+    }
     return await response.json();
 };
 
 const removeAll = async () => {
-    const response = await fetch(`BASE_URL`, {
+    const response = await fetch(BASE_URL, {
         credentials: "include",
         method: "DELETE",
     });
@@ -42,7 +46,7 @@ const removeAll = async () => {
 };
 
 const modify = async (id: number, section: SectionData) => {
-    const response = await fetch(`BASE_URL/${id}`, {
+    const response = await fetch(`${BASE_URL}/${id}`, {
         credentials: "include",
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
