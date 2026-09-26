@@ -1,4 +1,4 @@
-import { useSections } from "../../hooks/useSections";
+import { useSections } from "../../context/SectionsContext";
 import Section from "./Section";
 
 function Sections() {

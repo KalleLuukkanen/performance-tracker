@@ -1,5 +1,5 @@
 import type { SectionData } from "../../api/sectionsApi";
-import { useSections } from "../../hooks/useSections";
+import { useSections } from "../../context/SectionsContext";
 import { Trash } from "lucide-react";
 
 function Section({ section }: { section: SectionData }) {

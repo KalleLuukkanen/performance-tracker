@@ -1,12 +1,25 @@
+import { createContext, useContext, useState, useEffect, useRef, type ReactNode } from "react";
 import * as sectionsApi from "../api/sectionsApi";
-import { useState, useEffect } from "react";
 import type { SectionData, SectionInput } from "../api/sectionsApi";
 
-export function useSections() {
+type SectionsContextValue = {
+    sections: SectionData[];
+    create: (section: SectionInput) => Promise<SectionData>;
+    remove: (section_id: number) => Promise<SectionData>;
+    removeAll: () => Promise<SectionData[]>;
+    modify: (section_id: number, new_section: SectionData) => Promise<SectionData>;
+};
+
+const SectionsContext = createContext<SectionsContextValue | null>(null);
+
+export function SectionsProvider({ children }: { children: ReactNode }) {
     const [sections, setSections] = useState<SectionData[]>([]);
+    const fetchedRef = useRef(false);
 
     useEffect(() => {
-        sectionsApi.getAll().then(setSections)
+        if (fetchedRef.current) return;
+        fetchedRef.current = true;
+        sectionsApi.getAll().then(setSections);
     }, []);
 
     const create = async (section: SectionInput) => {
@@ -15,7 +28,7 @@ export function useSections() {
             setSections((prev) => [...prev, created]);
             return created;
         } else {
-            alert("There was a problem creating the section, please try again");
+            alert("Section creation unsuccessful, please try again");
         }
     };
 
@@ -45,5 +58,15 @@ export function useSections() {
         }
     };
 
-    return { sections, create, remove, removeAll, modify };
+    return (
+        <SectionsContext.Provider value={{ sections, create, remove, removeAll, modify }}>
+            {children}
+        </SectionsContext.Provider>
+    )
+}
+
+export function useSections() {
+    const ctx = useContext(SectionsContext);
+    if (!ctx) throw new Error("useSections must be used within SectionsProvider");
+    return ctx;
 }

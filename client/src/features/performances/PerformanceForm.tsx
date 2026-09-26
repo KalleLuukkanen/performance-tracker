@@ -1,5 +1,5 @@
 import { usePerformances } from "../../context/PerformancesContext"
-import { useSections } from "../../hooks/useSections";
+import { useSections } from "../../context/SectionsContext";
 import { useState } from "react"
 
 function PerformanceForm() {
