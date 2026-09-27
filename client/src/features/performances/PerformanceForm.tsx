@@ -3,14 +3,13 @@ import { useSections } from "../../context/SectionsContext";
 import { useState } from "react"
 
 function PerformanceForm() {
+    const { sections } = useSections();
+    const { create } = usePerformances();
+
     const [efficiency, setEfficiency] = useState("");
     const [hoursSpent, setHoursSpent] = useState("8.00");
     const [section, setSection] = useState("");
     const [workdate, setWorkdate] = useState(new Date().toISOString().split("T")[0]);
-
-    const { sections } = useSections();
-    const { create } = usePerformances();
-
 
     const reset = () => {
         setEfficiency("");
@@ -77,6 +76,7 @@ function PerformanceForm() {
                         className="p-1 rounded border border-gray-300 w-fit"
                         onChange={(e) => setSection(e.target.value)}
                     >
+                        <option value="">Select a section</option>
                         {sections.map((s) =>
                             <option key={s.id} value={s.id}>{s.name}</option>
                         )}
