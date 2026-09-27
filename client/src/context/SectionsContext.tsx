@@ -4,6 +4,7 @@ import type { SectionData, SectionInput } from "../api/sectionsApi";
 
 type SectionsContextValue = {
     sections: SectionData[];
+    getOne: (id: number) => SectionData | undefined;
     create: (section: SectionInput) => Promise<SectionData>;
     remove: (section_id: number) => Promise<SectionData>;
     removeAll: () => Promise<SectionData[]>;
@@ -21,6 +22,10 @@ export function SectionsProvider({ children }: { children: ReactNode }) {
         fetchedRef.current = true;
         sectionsApi.getAll().then(setSections);
     }, []);
+
+    const getOne = (id: number) => {
+        return sections.find((s) => s.id === id);
+    };
 
     const create = async (section: SectionInput) => {
         const created = await sectionsApi.create(section);
@@ -59,7 +64,7 @@ export function SectionsProvider({ children }: { children: ReactNode }) {
     };
 
     return (
-        <SectionsContext.Provider value={{ sections, create, remove, removeAll, modify }}>
+        <SectionsContext.Provider value={{ sections, getOne, create, remove, removeAll, modify }}>
             {children}
         </SectionsContext.Provider>
     )

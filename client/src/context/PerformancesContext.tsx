@@ -4,6 +4,7 @@ import type { PerformanceData, PerformanceInput } from "../api/performancesApi";
 
 type PerformancesContextValue = {
     performances: PerformanceData[];
+    getOne: (id: number) => PerformanceData | undefined;
     create: (performance: PerformanceInput) => Promise<PerformanceData>;
     remove: (id: number) => Promise<PerformanceData>;
     removeAll: () => Promise<PerformanceData[]>;
@@ -22,6 +23,10 @@ export function PerformancesProvider({ children }: { children: ReactNode }) {
         fetchedRef.current = true;
         performancesApi.getAll().then(setPerformances);
     }, []);
+
+    const getOne = (id: number) => {
+        return performances.find((p) => p.id === id);
+    };
 
     const create = async (performance: PerformanceInput) => {
         const created = await performancesApi.create(performance);
@@ -74,7 +79,7 @@ export function PerformancesProvider({ children }: { children: ReactNode }) {
     };
 
     return (
-        <PerformancesContext.Provider value={{ performances, create, remove, removeAll, updateHours, modify }}>
+        <PerformancesContext.Provider value={{ performances, getOne, create, remove, removeAll, updateHours, modify }}>
             {children}
         </PerformancesContext.Provider>
     );
