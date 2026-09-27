@@ -55,7 +55,7 @@ function Section({ section }: { section: SectionData }) {
                 </div>
             </div>
             {!modifying ?
-                <button className="ml-auto cursor-pointer" onClick={removeSec}><Trash /></button> :
+                <button className="ml-auto cursor-pointer hover:text-red-600" onClick={removeSec}><Trash /></button> :
                 <div className="ml-auto flex flex-col">
                     <button className="cursor-pointer" onClick={cancel}><X /></button>
                     <button className="cursor-pointer" onClick={modifySec}><Check /></button>
