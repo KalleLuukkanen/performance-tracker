@@ -6,6 +6,12 @@ import Sections from "../features/sections/Sections";
 function UserPage({ onClose }: { onClose: () => void }) {
     const { userState, deleteAccount } = useUserState();
 
+    const deleteAcc = async () => {
+        if (!confirm("Are you sure you want to delete this account?")) return;
+        await deleteAccount();
+        window.location.href = "/register";
+    };
+
     return (
         <div
             className="w-full max-w-fit max-h-[90vh] overflow-y-auto rounded-xl bg-white p-4 shadow-xl flex flex-col space-y-1"
@@ -21,7 +27,7 @@ function UserPage({ onClose }: { onClose: () => void }) {
                     <p className="text-xl">User info:</p>
                     <p>Email: {userState.email}</p>
                     <p>Created: {userState.createdAt?.toLocaleDateString("fi-FI")}</p>
-                    <button className="border rounded w-fit p-1 mx-auto cursor-pointer">Delete account</button>
+                    <button className="border rounded w-fit p-1 mx-auto cursor-pointer" onClick={deleteAcc}>Delete account</button>
                 </div>
             </div>
         </div>
