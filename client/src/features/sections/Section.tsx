@@ -1,11 +1,13 @@
 import { useState } from "react";
 import type { SectionData } from "../../api/sectionsApi";
 import { useSections } from "../../context/SectionsContext";
+import { usePerformances } from "../../context/PerformancesContext";
 import { Trash, X, Check } from "lucide-react";
 
 function Section({ section }: { section: SectionData }) {
 
     const { remove, modify } = useSections();
+    const { removeBySection } = usePerformances();
 
     const [modifying, setModifying] = useState(false);
     const [name, setName] = useState(section.name)
@@ -26,6 +28,7 @@ function Section({ section }: { section: SectionData }) {
     const removeSec = async () => {
         if (!confirm("Are you sure you wish to delete this section? All the performances of the section will also be deleted.")) return;
         await remove(section.id);
+        removeBySection(section.id);
     };
 
     return (

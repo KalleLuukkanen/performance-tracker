@@ -10,6 +10,7 @@ type PerformancesContextValue = {
     removeAll: () => Promise<PerformanceData[]>;
     updateHours: (id: number, new_hours: number) => Promise<PerformanceData>;
     modify: (id: number, performance: PerformanceData) => Promise<PerformanceData>;
+    removeBySection: (section_id: number) => void;
 };
 
 const PerformancesContext = createContext<PerformancesContextValue | null>(null);
@@ -78,8 +79,12 @@ export function PerformancesProvider({ children }: { children: ReactNode }) {
         }
     };
 
+    const removeBySection = (section_id: number) => {
+        setPerformances((prev) => prev.filter((p) => p.section_id !== section_id));
+    }
+
     return (
-        <PerformancesContext.Provider value={{ performances, getOne, create, remove, removeAll, updateHours, modify }}>
+        <PerformancesContext.Provider value={{ performances, getOne, create, remove, removeAll, updateHours, modify, removeBySection }}>
             {children}
         </PerformancesContext.Provider>
     );
