@@ -10,9 +10,9 @@ function Dashboard() {
     const { sections } = useSections();
     const performancesOfPhase = performanceUtils.performancesOfPhase(performances, today);
 
-    return (
-        <div className="flex flex-col">
-            <div className="grid grid-cols-2">
+    if (performancesOfPhase.length > 0) {
+        return (
+            <div className="sm:grid sm:grid-cols-2 flex flex-col space-y-4">
                 <div className="flex flex-col space-y-4">
                     <span className="text-2xl">{performanceUtils.phaseAsString(today)}</span>
                     <ul className="flex flex-wrap space-x-4 space-y-2">
@@ -27,7 +27,7 @@ function Dashboard() {
                     <span className="text-2xl">Efficiency:</span>
                     <ul className="flex flex-col space-y-2">
                         {sections.map(s => (
-                            <li>
+                            <li key={s.id}>
                                 {performanceUtils.performancesOfSection(performancesOfPhase, s.id).length > 0 ?
                                     <>
                                         <p className="text-xl">{s.name}: {performanceUtils.getEfficiency(performanceUtils.performancesOfSection(performancesOfPhase, s.id)).toFixed(2)}</p>
@@ -37,14 +37,21 @@ function Dashboard() {
                                     :
                                     <p className="text-xl">{s.name}: No data for this phase</p>
                                 }
-
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <>
+                <p className="text-lg">You have no performances in the current phase. Add new performances, or view the previous phases in <a href="/phases" className="underline text-blue-600">here</a>.</p>
+                <p className="text-lg">Also, if you don't have any sections added yet, you can add some by clicking on the user icon in the top right corner.</p>
+            </>
+        )
+    }
+
 }
 
 export default Dashboard;
