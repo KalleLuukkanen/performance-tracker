@@ -40,8 +40,8 @@ const updateHours = async (req: Request, res: Response) => {
     const id = Number(req.params.performanceId);
     if (!Number.isInteger(id)) return res.status(400).json({ error: "Invalid id" });
     const performance = req.body;
-    if (!performance.performance_hours) return res.status(400).json({ error: "Missing performance hours" });
-    const modified_performance = await performancesRepository.updateHours(user_id, id, performance.performance_hours);
+    if (!performance.new_hours) return res.status(400).json({ error: "Missing performance hours" });
+    const modified_performance = await performancesRepository.updateHours(user_id, id, performance.new_hours);
     if (!modified_performance) return res.status(404).json({ error: "Updating performance unsuccessful" });
     return res.status(200).json(modified_performance);
 };
