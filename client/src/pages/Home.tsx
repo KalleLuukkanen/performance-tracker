@@ -7,7 +7,7 @@ function Home() {
             <div className="flex flex-col rounded-xl shadow-2xl p-4 bg-white border">
                 <Dashboard />
             </div>
-            <div className="flex flex-col rounded-xl shadow-2xl p-4 bg-white items-center justify-center w-fit mx-auto border">
+            <div className="flex flex-col rounded-xl shadow-2xl p-4 bg-white items-center justify-center mx-auto border">
                 <PerformanceForm />
             </div>
         </div>
