@@ -13,7 +13,6 @@ function Header() {
             <nav className="flex rounded-xl shadow-2xl border p-2 space-x-4 shadow-2xl mx-auto relative">
                 <a href="/" className="hover:font-bold">Home</a>
                 <a href="/phases" className="hover:font-bold">Phases</a>
-                <a href="/about" className="hover:font-bold">About</a>
             </nav>
             <div className="space-x-2 ml-auto">
                 <button className="cursor-pointer border rounded p-2" title="User page" onClick={() => setShowingUserPage(!showingUserPage)}><User /></button>

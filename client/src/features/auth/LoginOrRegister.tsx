@@ -74,12 +74,7 @@ function LoginOrRegister({ isLogin }: { isLogin: boolean }) {
                 <span className="border border-gray-500 mx-2" />
                 {isLogin && <p>No account yet? Register <a href="/register" className="text-blue-600 hover:underline">here</a></p>}
                 {!isLogin &&
-                    <div className="space-y-1">
-                        <p>Already have an account? Login <a href="/login" className="text-blue-600 hover:underline">here</a></p>
-                        <p>Or if you wish to read more about the page before signing up, you can do so{" "}
-                            <a href="/about" className="text-blue-600 hover:underline">here</a>
-                        </p>
-                    </div>
+                    <p>Already have an account? Login <a href="/login" className="text-blue-600 hover:underline">here</a></p>
                 }
             </div>
         )
