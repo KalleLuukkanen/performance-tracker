@@ -28,12 +28,12 @@ function Performance({ performance }: { performance: PerformanceData }) {
     };
 
     return (
-        <div className="flex">
+        <div className="flex w-fit">
             <div>
                 <div className="flex space-x-1">
                     <p className="text-lg">Efficiency:</p>
                     <input
-                        className="text-lg"
+                        className="text-lg w-20"
                         type="number"
                         value={eff}
                         onChange={(e) => {

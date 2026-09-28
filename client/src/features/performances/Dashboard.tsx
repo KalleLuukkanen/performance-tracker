@@ -12,7 +12,7 @@ function Dashboard() {
 
     if (performancesOfPhase.length > 0) {
         return (
-            <div className="sm:grid sm:grid-cols-2 flex flex-col space-y-4">
+            <div className="sm:grid sm:grid-cols-[2fr_1fr] flex flex-col space-y-4">
                 <div className="flex flex-col space-y-4">
                     <span className="text-2xl">{performanceUtils.phaseAsString(today)}</span>
                     <ul className="flex flex-wrap space-x-4 space-y-2">
