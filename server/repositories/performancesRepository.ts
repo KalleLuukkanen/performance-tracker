@@ -6,7 +6,8 @@ const getAll = async (user_id: string) => {
     const result = await sql`
         SELECT *
         FROM performances
-        WHERE user_id = ${user_id};`;
+        WHERE user_id = ${user_id}
+        ORDER BY workdate DESC;`;
     return result;
 };
 
