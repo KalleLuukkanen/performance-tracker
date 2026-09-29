@@ -25,6 +25,31 @@ export const phaseAsString = (date: Date) => {
     return `${first_day.toLocaleDateString("fi-FI")} - ${last_day.toLocaleDateString("fi-FI")}`
 };
 
+export const getPhases = (performances: PerformanceData[]) => {
+    let phasesMap = new Map<string, [Date, Date]>();
+    for (const p of performances) {
+        const d = new Date(p.workdate);
+
+        const year = d.getUTCFullYear();
+        const month = d.getUTCMonth();
+        const day = d.getUTCDate();
+
+        let first_day: Date;
+        let last_day: Date;
+
+        if (day <= 15) {
+            first_day = new Date(Date.UTC(year, month, 1));
+            last_day = new Date(Date.UTC(year, month, 15));
+        } else {
+            first_day = new Date(Date.UTC(year, month, 16));
+            last_day = new Date(Date.UTC(year, month + 1, 0));
+        }
+
+        phasesMap.set(first_day.toISOString(), [first_day, last_day]);
+    }
+    return Array.from(phasesMap);
+};
+
 export const performancesOfPhase = (performances: PerformanceData[], date: Date) => {
     const d = new Date(date);
 
